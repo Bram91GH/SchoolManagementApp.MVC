@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagementApp.MVC.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SchoolManagementApp.MVC.Controllers
 {
+    [Authorize]
     public class ClassesController : Controller
     {
         private readonly SchoolManagementDbContext _context;
@@ -26,6 +28,7 @@ namespace SchoolManagementApp.MVC.Controllers
         }
 
         // GET: Classes/Details/5
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Classes == null)
@@ -58,6 +61,7 @@ namespace SchoolManagementApp.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Create([Bind("Id,LecturerId,CourseId,Time")] Class @class)
         {
             if (ModelState.IsValid)

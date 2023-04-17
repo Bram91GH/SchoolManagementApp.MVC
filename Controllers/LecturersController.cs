@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagementApp.MVC.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SchoolManagementApp.MVC.Controllers
 {
+    [Authorize]
     public class LecturersController : Controller
     {
         private readonly SchoolManagementDbContext _context;
@@ -55,6 +57,7 @@ namespace SchoolManagementApp.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Create([Bind("Id,FirstName,LastName")] Lecturer lecturer)
         {
             if (ModelState.IsValid)
@@ -87,6 +90,7 @@ namespace SchoolManagementApp.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName")] Lecturer lecturer)
         {
             if (id != lecturer.Id)
@@ -118,6 +122,7 @@ namespace SchoolManagementApp.MVC.Controllers
         }
 
         // GET: Lecturers/Delete/5
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Lecturers == null)
